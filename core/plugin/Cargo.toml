@@ -1,0 +1,12 @@
+[package]
+name = "plugin"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+salvo = { workspace = true }
+libloading = { workspace = true }
+tracing = { workspace = true }
+once_cell = { workspace = true }
+anyhow = { workspace = true }
+interface = { path = "../../interface" }

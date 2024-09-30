@@ -1,0 +1,15 @@
+[package]
+name = "example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+salvo = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+interface = { path = "../../interface" }
+
+[lib]
+# name = "example"     # must use default name for makefile to work (package name), or don't set it
+path = "src/lib.rs"
+crate-type = ["dylib"]

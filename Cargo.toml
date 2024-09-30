@@ -1,0 +1,59 @@
+[package]
+name = "zew"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [".", "core/*", "interface", "plugin/*"]
+
+[workspace.dependencies]
+mimalloc = { version = "0.1.43", default-features = false }
+tokio = { version = "1.40.0", features = ["full"] }
+
+salvo = { version = "0.72.4", features = [
+    "logging",
+    "jwt-auth",
+    "cors",
+    "serve-static",
+    "craft",
+] }
+
+dotenvy = { version = "0.15.7" }
+
+libloading = { version = "0.8.5" }
+
+tracing = { version = "0.1.40" }
+tracing-subscriber = { version = "0.3.18", features = ["json", "chrono"] }
+tracing-appender = { version = "0.2.3" }
+
+anyhow = { version = "1.0.89" }
+thiserror = { version = "1.0.64" }
+
+once_cell = { version = "1.19.0" }
+serde = { version = "1.0.210" }
+serde_json = { version = "1.0.128" }
+jsonwebtoken = { version = "9.3.0" }
+bcrypt = { version = "0.15.1" }
+time = { version = "0.3.36" }
+
+
+[dependencies]
+mimalloc = { workspace = true }
+tokio = { workspace = true }
+common = { path = "./core/common" }
+plugin = { path = "./core/plugin" }
+api = { path = "./core/api" }
+
+[profile.dev]
+opt-level = 1 # 1级优化
+
+[profile.dev.package."*"]
+opt-level = 3 # 3级优化依赖
+
+[profile.release]
+codegen-units = 1
+debug = false
+lto = "fat"
+opt-level = 3
+# painc = "abort"
+# strip = "symbols"
